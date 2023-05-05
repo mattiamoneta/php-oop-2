@@ -9,7 +9,7 @@
     protected $name;
     protected $price;
     protected $thumbnail;
-    protected $category;
+    public $category;
     protected $description;
 
 
@@ -97,13 +97,13 @@
   */
   class ToyProduct extends Product{
     
-    protected $netWeight;
-    protected $foodCategory;
+    protected $toyFeatures = [];
     
 
-    function __construct($_name, $_description, $_price, $_thumbnail, PetCategory $category){
+    function __construct($_name, $_description, $_price, $_thumbnail, PetCategory $_category, $_toyFeatures){
         
-        parent::__construct($_name,$_description, $_price, $_thumbnail, $category);
+        parent::__construct($_name, $_description, $_price, $_thumbnail, $_category);
+        $this->toyFeatures = $_toyFeatures; 
     }
 
     public static function getType(){
@@ -111,3 +111,19 @@
     }
 
  }
+
+ /**
+  * ACCESSORIES
+  */
+
+  class AccessoryProduct extends Product{
+    function __construct($_name, $_description, $_price, $_thumbnail, PetCategory $_category){
+        
+        parent::__construct($_name, $_description, $_price, $_thumbnail, $_category);
+
+    }
+
+    public static function getType(){
+        return "Accessory";
+    }
+  }
