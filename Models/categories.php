@@ -27,10 +27,17 @@
  }
 
  class FoodCategory extends PetCategory{
+
+    public $foodType;
+
+    function __construct($_foodType){
+        $this->foodType = $_foodType;
+    }
+
     
-    public function setCategory($category){
-        if($category == 'dry' || $category == 'wet'){
-            $this->category = $category;
+    public function setCategory($foodType){
+        if($foodType == 'dry' || $foodType == 'wet'){
+            $this->foodType = $foodType;
         }else {
             echo 'ERROR: Category not valid.';
             die();

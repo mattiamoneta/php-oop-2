@@ -11,6 +11,9 @@
     $marioRossi = new UserLogged("mariorossi01", "Mario", "Rossi", "01/01/1980");
     $marioRossi->addToCart($catalog[0]);
 
+    #Add discount to item
+    $catalog[2]->setDiscount(20);
+
 
 ?>
 
@@ -49,11 +52,35 @@
                                         <img src=\"{$item->getThumbnail()}\" class=\"card-img-top\" alt=\"...\">
                                         <div class=\"card-body\">
                                             <h5 class=\"card-title\">{$item->getName()}</h5>
-                                            <p class=\"card-text\">{$item->getDescription()}</p>
+                                            <p class=\"card-text\">{$item->getDescription()}</p>";
+
+                                            if($item instanceof FoodProduct){
+                                                echo "
+                                                        <div class=\"small fst-italic\">({$item->getFood()} food)</div>
+                                                        <div class=\"fw-bold mb-4\">{$item->getWeight()} Kg</div>
+                                                    ";
+                                            } else if ($item instanceof ToyProduct){
+                                                
+                                                echo "<ul>";
+                                                foreach($item->getFeatures() as $feature){
+                                                    echo "<li>{$feature}</li>";
+                                                }   
+                                                echo "</ul>";
+                                                
+                                            }
+
+                                        echo "<div class=\"mb-3\">
+                                                <h5>€ {$item->getPrice()}</h5>
+                                            </div>
                                             <div class=\"d-flex justify-content-between align-items-center\">
                                                 <a href=\"#\" class=\"btn btn-success\">BUY NOW</a>
+                                                <span class=\"small\">{$item::getType()}</span>
                                                 <i class=\"fa-solid fa-{$item->category->getCategory()}\"></i>
-                                            </div>
+                                            </div>";
+
+                                            
+                                    echo "
+                                            
                                         </div>
                                         </div>
                                     </div>

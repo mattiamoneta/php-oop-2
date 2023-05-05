@@ -11,6 +11,7 @@
     protected $thumbnail;
     public $category;
     protected $description;
+    protected $discount;
 
 
     function __construct($_name, $_description, $_price, $_thumbnail, PetCategory $category){
@@ -34,6 +35,11 @@
     public function setName($name){
         $this->name = $name;
     }
+
+    public function setDiscount($discount){
+        $this->discount = $discount;
+    }
+
 
     public function setDescription($description){
         $this->description = $description;
@@ -66,6 +72,10 @@
         return $this->thumbnail;
     }
 
+    public function getDiscount(){
+        return $this->discount;
+    }
+
  }
 
 
@@ -90,6 +100,14 @@
         return "Food";
     }
 
+    public function getWeight(){
+        return $this->netWeightKg;
+    }
+
+    public function getFood(){
+        return $this->foodCategory->foodType;
+    }
+
  }
 
   /**
@@ -108,6 +126,10 @@
 
     public static function getType(){
         return "Toy";
+    }
+
+    public function getFeatures(){
+        return $this->toyFeatures;
     }
 
  }
