@@ -9,7 +9,10 @@
 
     #Add a new LOGGED user
     $credit = new CreditCard("1234567890123","01-05-2023","123");
-    $user = new UserLogged($credit, "mariorossi01", "Mario", "Rossi", "01/01/1980");
+   $user = new UserLogged($credit, "mariorossi01", "Mario", "Rossi", "01/01/1980");
+    
+    #Uncomment to use Host account (no discount)
+    #$user = new User($credit);
     $user->addToCart($catalog[0]);
 
     #Add discount to item
