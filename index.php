@@ -4,12 +4,13 @@
     require_once __DIR__ . "/Models/product.php";
     require_once __DIR__ . "/Models/categories.php";
     require_once __DIR__ . "/Models/user.php";
-    require_once __DIR__ . "/Models/transaction.php";
+    require_once __DIR__ . "/Models/creditCard.php";
     require_once __DIR__ . "/local_db.php";
 
     #Add a new LOGGED user
-    $marioRossi = new UserLogged("mariorossi01", "Mario", "Rossi", "01/01/1980");
-    $marioRossi->addToCart($catalog[0]);
+    $credit = new CreditCard("1234567890123","01-05-2023","123");
+    $user = new UserLogged($credit, "mariorossi01", "Mario", "Rossi", "01/01/1980");
+    $user->addToCart($catalog[0]);
 
     #Add discount to item
     $catalog[2]->setDiscount(20);
@@ -34,11 +35,49 @@
 </head>
     <body>
         <header>
-            <nav class="navbar bg-body-tertiary">
-                <nav class="navbar bg-body-tertiary">
-                <div class="container-fluid">
-                    <span class="navbar-brand mb-0 h1">Pet Shop</span>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">PetShop</a>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropstart">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <?php
+                            if($user instanceof UserLogged){
+                                echo $user->getUsername();
+                            }else{
+                                echo "Host";
+                            }
+                        ?>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <h6 class="ms-3">Cart</h6>
+                        <li><hr class="dropdown-divider"></li>
+                        <h3 class="ms-3"><?php echo "{$user->getCartTotal()} €"  ?></h3>
+                        <?php
+                             if($user instanceof UserLogged){
+                                echo "<span class=\"text-danger ms-3\">Discount -20%</span>";
+                             }
+                        ?>
+
+                        <?php 
+                            if($user->validateCreditCard() == false){
+                                echo "<div class=\"ms-3\">
+                                        <button class=\"btn btn-muted mt-4\" disabled>BUY NOW</button>
+                                        </div>
+                                        <div class=\"small text-danger ms-3\">Credit Card expiry in date {$user->cardExp()}</div>
+                                     ";
+                            }else{
+                                echo " <button class=\"btn btn-success mt-4\">BUY NOW</button>";
+                            }
+                            
+                        ?>
+                        
+                        
+                    </ul>
+                    </li>
+                </ul>
                 </div>
+            </div>
             </nav>
         </header>
        <main>
@@ -93,5 +132,7 @@
                 </div>
             </div>
        </main>
+
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     </body>
 </html>
