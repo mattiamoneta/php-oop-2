@@ -7,6 +7,7 @@
     require_once __DIR__ . "/Models/creditCard.php";
     require_once __DIR__ . "/local_db.php";
 
+
     #Add a new LOGGED user
     $credit = new CreditCard("1234567890123","01-05-2023","123");
     $user = new UserLogged($credit, "mariorossi01", "Mario", "Rossi", "01/01/1980");

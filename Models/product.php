@@ -1,10 +1,16 @@
 <?php
 
+
+require_once __DIR__ . "/../Traits/Box.php";
+
 /**
  * CLASSE PRODOTTO
  */
 
+
  class Product{
+
+    
 
     protected $name;
     protected $price;
@@ -24,9 +30,9 @@
                 $this->price = $_price;
             }
 
-        }catch(Exception $e){
-            echo $e->getMessage();
-        }
+            }catch(Exception $e){
+                echo $e->getMessage();
+            }
 
        
         $this->thumbnail = $_thumbnail;
@@ -119,9 +125,12 @@
   */
  class FoodProduct extends Product{
     
+    use ShippingBox;
+
     protected $netWeightKg;
     protected $foodCategory;
-    
+
+ 
 
     function __construct($_name, $_description, $_price, $_thumbnail, PetCategory $_category, FoodCategory $_foodCategory, $_netWeightKg){
         
@@ -149,10 +158,12 @@
   * TOYS
   */
   class ToyProduct extends Product{
-    
-    protected $toyFeatures = [];
-    
 
+    use ShippingBox;
+
+    protected $toyFeatures = [];
+
+    
     function __construct($_name, $_description, $_price, $_thumbnail, PetCategory $_category, $_toyFeatures){
         
         parent::__construct($_name, $_description, $_price, $_thumbnail, $_category);
@@ -174,6 +185,9 @@
   */
 
   class AccessoryProduct extends Product{
+
+    use ShippingBox;
+
     function __construct($_name, $_description, $_price, $_thumbnail, PetCategory $_category){
         
         parent::__construct($_name, $_description, $_price, $_thumbnail, $_category);
@@ -182,5 +196,21 @@
 
     public static function getType(){
         return "Accessory";
+    }
+  }
+
+  /**
+  * DIGITAL PRODUCT
+  */
+
+  class DigitalProduct extends Product{
+    function __construct($_name, $_description, $_price, $_thumbnail, PetCategory $_category){
+        
+        parent::__construct($_name, $_description, $_price, $_thumbnail, $_category);
+
+    }
+
+    public static function getType(){
+        return "Digital Product";
     }
   }

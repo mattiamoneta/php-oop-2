@@ -9,7 +9,7 @@
         new FoodProduct(
             "Random Food for Dog",
             "lorem ipsum dolor sit amet",
-            '22.00',
+            22.00,
             "https://arcaplanet.vtexassets.com/arquivos/ids/268536/edgard-cooper-dog-adult-bio-organic-pollo-e-tacchino-front.jpg?v=1768484098", 
             new PetCategory('dog'), 
             new FoodCategory('dry'), 
@@ -44,8 +44,31 @@
                 'feature04',
                 'feature05'
             ]
-        )
+            ),
+
+            new DigitalProduct(
+                "eBook",
+                "lorem ipsum dolor sit amet",
+                8.50,
+                "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/51f+ToVzKYL.jpg", 
+                new PetCategory('cat')
+                
+            )
     ];
+
+
+
+    #Utilizza la Trait che indica la dimensione della scatola da usare 
+    #per spedire il prodotto al cliente. Funziona solo su prodotti non-digital.
+
+    $catalog[2]->setShippingBoxSize('L');
+    $catalog[1]->setShippingBoxSize('M');
+    $catalog[0]->setShippingBoxSize('S');
+    
+
+
+
+
 
     
 
