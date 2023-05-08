@@ -9,7 +9,7 @@
         new FoodProduct(
             "Random Food for Dog",
             "lorem ipsum dolor sit amet",
-            22.00,
+            '22.00',
             "https://arcaplanet.vtexassets.com/arquivos/ids/268536/edgard-cooper-dog-adult-bio-organic-pollo-e-tacchino-front.jpg?v=1768484098", 
             new PetCategory('dog'), 
             new FoodCategory('dry'), 

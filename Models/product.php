@@ -14,17 +14,34 @@
     protected $discount;
 
 
-    function __construct($_name, $_description, $_price, $_thumbnail, PetCategory $category){
+    function __construct(string $_name, string $_description, $_price, $_thumbnail, PetCategory $category){
         $this->name = $_name;
-        $this->price = $_price;
+
+        try{
+            if(!is_numeric($_price)){
+                throw new Exception('Price cannot be a string');
+            }else{
+                $this->price = $_price;
+            }
+
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
+
+       
         $this->thumbnail = $_thumbnail;
         $this->description = $_description;
 
-        if(!$category instanceof PetCategory){
-            echo "ERROR: Category not valid";
-            die();
-        }else{
-            $this->category = $category;
+        
+
+        try{
+            if(!$category instanceof PetCategory){
+                throw new Exception("Not a valid pet category");
+            }else{
+                $this->category = $category;
+            }
+        }catch(Exception $e){
+            echo $e->getMessage();
         }
 
         
@@ -37,7 +54,15 @@
     }
 
     public function setDiscount($discount){
-        $this->discount = $discount;
+        try{
+            if(!is_numeric($discount)){
+                throw new Exception('Discount cannot be a string');
+            }else{
+                $this->discount = $discount;
+            }
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
     }
 
 
@@ -47,7 +72,17 @@
 
 
     public function setPrice($price){
-        $this->price = $price;
+        
+
+        try{
+            if(!is_numeric($price)){
+                throw new Exception('Price not numeric');
+            }else{
+                $this->price = $price;
+            }
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
     }
 
     public function setThumbnail($thumbnail){

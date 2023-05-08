@@ -12,11 +12,15 @@
     }
 
     public function setCategory($category){
-        if($category == 'dog' || $category == 'cat'){
-            $this->category = $category;
-        }else {
-            echo 'ERROR: Category not valid.';
-            die();
+
+        try{
+            if($category == 'dog' || $category == 'cat'){
+                $this->category = $category;
+            }else {
+               throw new Exception('Not a valid category');
+            }
+        }catch(Exception $e){
+            echo $e->getMessage();
         }
     }
 
